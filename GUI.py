@@ -14,21 +14,6 @@ def raise_frame_for(frame):
         frame.tkraise()
     return
 
-'''
-#turns an entry into a string of underlines
-def turn_to_underlines(word):
-    char = [char for char in word]
-    ul = ""
-    if len(char) > 30:
-        ul = "Error Too Large"
-    else:
-        for x in char:
-            if x == " ":
-                ul += " "
-            else:
-                ul += " __"
-    return ul
-'''
 
 
 def create_under_labels(word):
@@ -153,4 +138,133 @@ guesslabel.place(relx=0.5, rely=0.585, anchor=CENTER)
 
 root.mainloop()
 
-print("hello")
+# "h  e   l   l  o"
+# 3 behind every l and 2 behind every other letter
+
+# def move_entry():
+# result = entry1.get()
+# label_update_guess.config(text=result)
+# entry1.delete(0, END)
+
+
+# button_3 = Button(first_frame, text="change label", command=move_entry()).place(x=15, y=15)
+
+# label_update_guess = Label(first_frame)
+# label_update_guess.place(relx=0.5, rely=0.4, anchor=CENTER)
+
+# underlines = StringVar()
+# underlines.set("\u0332  " * len(entry1.get()))
+
+# button_3 = Button(second_frame, text="Back", command=lambda: print_underlines()).place(x=50, y=50)
+
+
+# button_1.place(relx=0.5, rely=0.6, anchor=CENTER)
+
+# def checkToNewWindow() :
+# letters = entry1.get()
+# if len(letters) > 0 :
+# game_window()
+
+
+# prints the underlines that show the opposing player how many letters are in the word
+# word = input("What word would you like to opponent to guess? ")
+
+
+# print('\u0332  ' * len(word))
+
+
+# print('\u0332  \u0332a \u0332a \u0332u \u0332z \u0332z \u0332z');
+
+
+# def displayHangman(event):
+#     print(" ______")
+#     print(" |   \|");
+#     print(" O    |");
+#     print("/|\   |            You have already guessed:");
+#     print(" |    |");
+#     print("/ \   |");
+#     print("      |");
+#     print("   ___|___");
+#     print("");
+#
+# weight_lbs = input("What is your weight in pounds? ");
+# weight_kg = float(weight_lbs)/2.2
+# print(int(weight_kg))
+# input("what is your favorite color? ");
+# print("mosh likes blue");
+
+
+# def game_window() :
+# game = Tk()
+# game.title("Hangman")
+# game.geometry('500x500')
+
+# game.mainloop()
+
+# Changes frame and updates label
+# def raise_frame_update(frame) :
+#     letters = entry1.get()
+#     if len(letters) > 0:
+#         frame.tkraise()
+#         label_update_guess.config(text=letters)
+#         entry1.delete(0, END)
+
+# def show_the_underlines() :
+#     letters = entry1.get()
+#     string_to_display = '\u0332  ' * len(letters)
+#     label_update_guess("text") = string_to_display
+
+
+# def print_underlines() :
+#     letters = entry1.get()
+#     print('\u0332  ' * len(letters))
+
+################################################################################
+
+'''
+
+#creates a list of spaces from an entry that vary in length
+longletters = ['t', 'i', 'f', 'j', 'l']
+def space_list():
+    spaclist = []
+    print(result)
+    for x in range(len(result)):
+        if result[x] in longletters:
+            spaclist.append('__')
+        else:
+            spaclist.append('__')
+    for i in spaclist:
+        print(i)
+        return spaclist
+
+#creates a list of all the locations of a letter in a space list
+def calc_space_poss(letter1):
+    total = 0
+    totallist = []
+    for x in result:
+        if x in longletters:
+            total = total + 2
+        else:
+            total = total + 2
+        if x == letter1:
+            totallist.append(total)
+    return totallist
+
+
+'''
+
+'''
+#turns an entry into a string of underlines
+def turn_to_underlines(word):
+    char = [char for char in word]
+    ul = ""
+    if len(char) > 30:
+        ul = "Error Too Large"
+    else:
+        for x in char:
+            if x == " ":
+                ul += " "
+            else:
+                ul += " __"
+    return ul
+'''
