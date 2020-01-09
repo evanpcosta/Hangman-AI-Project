@@ -152,3 +152,5 @@ guesslabel = Label(second_frame, text="")
 guesslabel.place(relx=0.5, rely=0.585, anchor=CENTER)
 
 root.mainloop()
+
+print("hello")
