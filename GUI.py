@@ -7,16 +7,44 @@ def raise_frame_for(frame):
     labellist = []
     global result
     result = entry1.get()
-    if 40 > len(result) > 0:
-        print(len(result))
+    if 45 >= len(result) > 0:
         create_under_labels(result)
         frame.tkraise()
-        print(result)
         entry1.delete(0, END)
     else:
-        label_too_large.config(text="Entry too large (40 character max)")
-        print(len(result))
+        label_too_large.config(text="Entry too large (45 character max)")
     return
+
+
+def create_letter_labels(word):
+    global blank
+    blank = IntVar()
+    blank.set(' ')
+    global under
+    under = IntVar()
+    under.set(' __')
+    y = 0
+    i = 0
+    for x in range(len(word)):
+        if x < 20:
+            if word[x] == ' ':
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxx(x), rely=0.56, anchor=CENTER))
+            else:
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxx(x), rely=0.56, anchor=CENTER))
+        if 40 > x >= 20:
+            if word[x] == ' ':
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxy(y), rely=0.6, anchor=CENTER))
+                y = y + 1
+            else:
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxy(y), rely=0.6, anchor=CENTER))
+                y = y + 1
+        if 45 >= x >= 40:
+            if word[x] == ' ':
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxi(i), rely=0.64, anchor=CENTER))
+                i = i + 1
+            else:
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxi(i), rely=0.64, anchor=CENTER))
+                i = i + 1
 
 
 def create_under_labels(word):
@@ -27,45 +55,66 @@ def create_under_labels(word):
     under = IntVar()
     under.set(' __')
     y = 0
+    i = 0
     for x in range(len(word)):
         if x < 20:
             if word[x] == ' ':
-                labellist.append(Label(second_frame, textvariable=blank).place(relx=find_relx(x), rely=0.56, anchor=CENTER))
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxx(x), rely=0.56, anchor=CENTER))
             else:
-                labellist.append(Label(second_frame, textvariable=under).place(relx=find_relx(x), rely=0.56, anchor=CENTER))
-        else:
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxx(x), rely=0.56, anchor=CENTER))
+        if 40 > x >= 20:
+            print(word[20])
+            if word[20] != ' ':
+                dashlabel1.config(text='-')
             if word[x] == ' ':
-                labellist.append(Label(second_frame, textvariable=blank).place(relx=find_relx(y), rely=0.56, anchor=CENTER))
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxy(y), rely=0.6, anchor=CENTER))
             else:
-                labellist.append(Label(second_frame, textvariable=under).place(relx=find_relx(y), rely=0.6, anchor=CENTER))
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxy(y), rely=0.6, anchor=CENTER))
                 y = y + 1
-#problem with higher count letter words has to do with y and find relx probably with the result//2 calc
+        if 45 >= x >= 40:
+            if word[40] != ' ':
+                dashlabel2.config(text='-')
+            if word[x] == ' ':
+                labellist.append(Label(second_frame, textvariable=blank).place(relx=posnxi(i), rely=0.64, anchor=CENTER))
+            else:
+                labellist.append(Label(second_frame, textvariable=under).place(relx=posnxi(i), rely=0.64, anchor=CENTER))
+                i = i + 1
 
-def find_relx(x):
-    print(result)
-    print(len(result) // 2)
-    print(x)
-    if x == (len(result) // 2):
+
+
+def posnxx(x):
+    if len(result) > 20:
+        result1 = 20
+        return find_relxy(x, result1)
+    else:
+        result1 = len(result)
+        return find_relxy(x, result1)
+
+
+def posnxy(x):
+    if 40 >= len(result) > 20:
+        result1 = len(result) - 20
+        return find_relxy(x, result1)
+    if 45 >= len(result) > 40:
+        result1 = 20
+        return find_relxy(x, result1)
+
+
+def posnxi(x):
+    result1 = len(result) - 40
+    return find_relxy(x, result1)
+
+
+def find_relxy(x, result1):
+    if x == (result1 // 2):
         rx = 0.5
-        print(rx)
         return (rx)
-    elif x < (len(result) // 2):
-        nx = 0.5 - (((len(result) // 2) - x) * 0.04)
-        print(nx)
+    elif x < (result1 // 2):
+        nx = 0.5 - (((result1 // 2) - x) * 0.04)
         return nx
-    elif x > (len(result) // 2):
-        px = 0.5 + ((x - (len(result) // 2)) * 0.04)
-        print(px)
+    elif x > (result1 // 2):
+        px = 0.5 + ((x - (result1 // 2)) * 0.04)
         return px
-
-
-def create_letter_labels(word):
-    for x in range(len(word)):
-        if x > 30:
-            labellist.append(Label(second_frame, text="").place(relx=0.1 * x, rely=0.6, anchor=CENTER))
-        else:
-            labellist.append(Label(second_frame, text="").place(relx=0.1, rely=0.62, anchor=CENTER))
-    return labellist
 
 
 # changes the frame
@@ -77,13 +126,11 @@ def raise_frame_bac(frame):
     blank.set('')
     label_too_large.config(text=" ")
     # spacelist[:] = []
-    guesslabel.config(text=" ")
     guesslist[:] = []
 
 
 # if guessed correctly turns an underline into a letter
 guesslist = []
-
 
 def change_underline():
     letter = entry2.get()
@@ -96,7 +143,6 @@ def change_underline():
                 break
             # else:
             # turn show in the guessed wrong section
-        guesslabel.config(text="")
 
 
 root = Tk()
@@ -133,16 +179,13 @@ button_2 = Button(second_frame, text="Back", command=lambda: raise_frame_bac(fir
 button_3 = Button(second_frame, text="Guess", command=lambda: change_underline())
 button_3.place(relx=0.78, rely=0.7, anchor=CENTER)
 
-wordlabel = Label(second_frame, text="")
-wordlabel.place(relx=0.5, rely=0.6, anchor=CENTER)
+dashlabel1 = Label(second_frame, text=" ")
+dashlabel1.place(relx=0.89, rely=0.56, anchor=CENTER)
 
-guesslabel = Label(second_frame, text="")
-guesslabel.place(relx=0.5, rely=0.585, anchor=CENTER)
+dashlabel2 = Label(second_frame, text=" ")
+dashlabel2.place(relx=0.89, rely=0.6, anchor=CENTER)
 
 root.mainloop()
-
-# "h  e   l   l  o"
-# 3 behind every l and 2 behind every other letter
 
 # def move_entry():
 # result = entry1.get()
@@ -270,4 +313,38 @@ def turn_to_underlines(word):
             else:
                 ul += " __"
     return ul
+'''
+'''def find_relx(x):
+    print(result)
+    print(len(result) // 2)
+    print(x)
+    if x == (len(result) // 2):
+        rx = 0.5
+        print(rx)
+        return (rx)
+    elif x < (len(result) // 2):
+        nx = 0.5 - (((len(result) // 2) - x) * 0.04)
+        print(nx)
+        return nx
+    elif x > (len(result) // 2):
+        px = 0.5 + ((x - (len(result) // 2)) * 0.04)
+        print(px)
+        return px
+'''
+
+'''
+Mor info section:
+
+the dash means that the word is continued on the next line
+a space signifies a separation of a word
+
+you can only guess one letter at a time 
+
+you cant guess the same letter twice 
+
+Security:
+
+letters only
+if contain number or symbols 
+config label: only letters
 '''
