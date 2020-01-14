@@ -10,6 +10,10 @@ class APP:
     root.title('Hangman')
     root.geometry("500x400")
 
+    global third_frame
+    third_frame = Frame(root)
+    third_frame.place(x=0, y=0, width=500, height=500)
+
     global second_frame
     second_frame = Frame(root)
     second_frame.place(x=0, y=0, width=500, height=500)
@@ -52,5 +56,13 @@ class APP:
     global dashlabel2
     dashlabel2 = Label(second_frame, text=" ")
     dashlabel2.place(relx=0.89, rely=0.59, anchor=CENTER)
+
+    global lostlabel
+    lostlabel = Label(Main.third_frame, text="")
+    lostlabel.place(relx=0.5, rely=0.45, anchor=CENTER)
+
+    Main.lostlabel.config(text=" You Lost ")
+    button2 = Button(Main.third_frame, text="Restart", command=lambda: raise_frame_bac(Main.first_frame))
+    button2.place(relx=0.5, rely=0.5, anchor=CENTER)
 
     root.mainloop()

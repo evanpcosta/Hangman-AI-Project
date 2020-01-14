@@ -1,9 +1,11 @@
 from tkinter import *
+import time
+from self import self
 import Main
 
 # raises frame; puts first frame entry into second frame label
-from typing import List, Any
 def raise_frame_for(frame):
+    print(len("hi my name is evan and i like cheese"))
     global labellist
     labellist = []
     global letterlist
@@ -21,13 +23,19 @@ def raise_frame_for(frame):
         Main.label_too_large.config(text="Entry too large (45 character max)")
     return
 
+
 def create_hang_man():
     x = 0.35
-    hanglabel1 = Label(Main.second_frame, text="  _____________")
+    hanglabel1 = Label(Main.second_frame, text=" ______________")
+    global hanglabel2
     hanglabel1.place(relx=x, rely=0.1, anchor=CENTER)
+    global hanglabel3
     hanglabel2 = Label(Main.second_frame, text="                  \|")
+    global hanglabel4
     hanglabel2.place(relx=x, rely=0.14, anchor=CENTER)
-    hanglabel3 = Label(Main.second_frame, text="                  |")
+    global hanglabel5
+    hanglabel3 = Label(Main.second_frame, text="                   |")
+    global hanglabel6
     hanglabel3.place(relx=x, rely=0.18, anchor=CENTER)
     hanglabel4 = Label(Main.second_frame, text="                   |")
     hanglabel4.place(relx=x, rely=0.22, anchor=CENTER)
@@ -40,35 +48,6 @@ def create_hang_man():
     hanglabel8 = Label(Main.second_frame, text="                   ___|___")
     hanglabel8.place(relx=x, rely=0.38, anchor=CENTER)
 
-'''def change_hang_man():
-    x = 0.35
-    hanglabel1 = Label(Main.second_frame, text="  _____________")
-    hanglabel1.place(relx=x, rely=0.1, anchor=CENTER)
-    hanglabel2 = Label(Main.second_frame, text=" |                \|")
-    hanglabel2.place(relx=x, rely=0.14, anchor=CENTER)
-    hanglabel3 = Label(Main.second_frame, text=" O                |")
-    hanglabel3.place(relx=x, rely=0.18, anchor=CENTER)
-    hanglabel4 = Label(Main.second_frame, text="/|\                |")
-    hanglabel4.place(relx=x, rely=0.22, anchor=CENTER)
-    hanglabel5 = Label(Main.second_frame, text=" |                 |")
-    hanglabel5.place(relx=x, rely=0.26, anchor=CENTER)
-    hanglabel6 = Label(Main.second_frame, text="/ \                |")
-    hanglabel6.place(relx=x, rely=0.3, anchor=CENTER)
-    hanglabel7 = Label(Main.second_frame, text="                   |")
-    hanglabel7.place(relx=x, rely=0.34, anchor=CENTER)
-    hanglabel8 = Label(Main.second_frame, text="                   ___|___")
-    hanglabel8.place(relx=x, rely=0.38, anchor=CENTER)
-'''
-
-#     print(" ________")
-#     print(" |     \|");
-#     print(" O      |");
-#     print("/|\     |            You have already guessed:");
-#     print(" |      |");
-#     print("/ \     |");
-#     print("        |");
-#     print("     ___|___");
-#     print("");
 
 def create_under_labels(word):
     global blank
@@ -77,7 +56,7 @@ def create_under_labels(word):
     global under
     under = IntVar()
     under.set(' __')
-    y = 0
+    y: int = 0
     i = 0
     for x in range(len(word)):
         if x < 20:
@@ -85,37 +64,38 @@ def create_under_labels(word):
                 labellist.append(Label(Main.second_frame, textvariable=blank))
                 labellist[x].place(relx=posnxx(x), rely=0.52, anchor=CENTER)
                 letterlist.append(Label(Main.second_frame, text=" "))
-                letterlist[x].place(relx=posnxx(x), rely=0.50, anchor=CENTER)
             else:
                 labellist.append(
                     Label(Main.second_frame, textvariable=under).place(relx=posnxx(x), rely=0.52, anchor=CENTER))
                 letterlist.append(Label(Main.second_frame, text=" "))
                 letterlist[x].place(relx=posnxx(x) + 0.0025, rely=0.505, anchor=CENTER)
         if 40 > x >= 20:
-            print(word[20])
             if word[20] != ' ':
                 Main.dashlabel1.config(text='-')
             if word[x] == ' ':
                 labellist.append(
                     Label(Main.second_frame, textvariable=blank).place(relx=posnxy(y), rely=0.59, anchor=CENTER))
+                letterlist.append(Label(Main.second_frame, text=" "))
             else:
                 labellist.append(
                     Label(Main.second_frame, textvariable=under).place(relx=posnxy(y), rely=0.59, anchor=CENTER))
                 letterlist.append(Label(Main.second_frame, text=" "))
                 letterlist[x].place(relx=posnxy(y) + 0.0025, rely=0.575, anchor=CENTER)
-                y = y + 1
+            y = y + 1
         if 45 >= x >= 40:
             if word[40] != ' ':
                 Main.dashlabel2.config(text='-')
             if word[x] == ' ':
                 labellist.append(
                     Label(Main.second_frame, textvariable=blank).place(relx=posnxi(i), rely=0.65, anchor=CENTER))
+                letterlist.append(Label(Main.second_frame, text=" "))
             else:
                 labellist.append(
                     Label(Main.second_frame, textvariable=under).place(relx=posnxi(i), rely=0.65, anchor=CENTER))
                 letterlist.append(Label(Main.second_frame, text=" "))
                 letterlist[x].place(relx=posnxi(i) + 0.0025, rely=0.635, anchor=CENTER)
-                i = i + 1
+            i = i + 1
+
 
 def posnxx(x):
     if len(result) > 20:
@@ -125,6 +105,7 @@ def posnxx(x):
         result1 = len(result)
         return find_relxy(x, result1)
 
+
 def posnxy(x):
     if 40 >= len(result) > 20:
         result1 = len(result) - 20
@@ -133,9 +114,11 @@ def posnxy(x):
         result1 = 20
         return find_relxy(x, result1)
 
+
 def posnxi(x):
     result1 = len(result) - 40
     return find_relxy(x, result1)
+
 
 def find_relxy(x, result1):
     if x == (result1 // 2):
@@ -147,6 +130,7 @@ def find_relxy(x, result1):
     elif x > (result1 // 2):
         px = 0.5 + ((x - (result1 // 2)) * 0.04)
         return px
+
 
 # changes the frame
 def raise_frame_bac(frame):
@@ -161,24 +145,63 @@ def raise_frame_bac(frame):
     Main.dashlabel1.config(text=" ")
     Main.dashlabel2.config(text=" ")
     letterlist[:] = []
+    wronglist[:] = []
+    create_hang_man()
+
 
 # if guessed correctly turns an underline into a letter
 global guesslist
 guesslist = []
+global wronglist
+wronglist = []
 
 def change_underline():
     letter = Main.entry2.get()
+    print(letter)
     lisr = list(result)
     if len(letter) == 1 and letter not in guesslist:
         guesslist.append(letter)
+        if letter not in lisr:
+            wronglist.append(letter)
+            change_hang_man()
         Main.entry2.delete(0, END)
         for x in range(len(result)):
             if letter == lisr[x]:
                 letterlist[x].config(text=letter)
 
-            # else:
-            # turn show in the guessed wrong section
+# turn show in the guessed wrong section
+def change_hang_man():
+    x = len(wronglist)
+    if x == 1:
+        hanglabel2.config(text="|                 \|")
+    elif x == 2:
+        hanglabel3.config(text=" O                |")
+    elif x == 3:
+        hanglabel4.config(text=" |                 |")
+    elif x == 4:
+        hanglabel4.config(text=" |\                |")
+    elif x == 5:
+        hanglabel4.config(text="/|\                |")
+    elif x == 6:
+        hanglabel5.config(text=" |                 |")
+    elif x == 7:
+        hanglabel6.config(text="/                  |")
+    elif x == 8:
+        hanglabel6.config(text="/ \                |")
+        time.sleep(2)
+        Main.third_frame.tkraise()
 
+
+
+#     print(" ________")
+#     print(" |     \|");
+#     print(" O      |");
+#     print("/|\     |            You have already guessed:");
+#     print(" |      |");
+#     print("/ \     |");
+#     print("        |");
+#     print("     ___|___");
+#     print("");
 
 # def move_entry():
 # result = entry1.get()
