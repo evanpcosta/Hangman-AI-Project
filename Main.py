@@ -1,5 +1,3 @@
-import app as app
-
 from GUI import *
 
 class APP:
@@ -66,5 +64,9 @@ class APP:
     Main.lostlabel.config(text=" You Lost ")
     button2 = Button(Main.third_frame, text="Restart", command=lambda: raise_frame_bac(Main.first_frame))
     button2.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+    global label_wrong_let
+    label_wrong_let = Label(second_frame, text="")
+    label_wrong_let.place(relx=0.7, rely=0.3, anchor=CENTER)
 
     root.mainloop()

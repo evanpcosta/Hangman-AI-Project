@@ -1,6 +1,5 @@
 from tkinter import *
 import time
-from self import self
 import Main
 
 # raises frame; puts first frame entry into second frame label
@@ -135,6 +134,7 @@ def find_relxy(x, result1):
 # changes the frame
 def raise_frame_bac(frame):
     Main.entry2.delete(0, END)
+    Main.entry1.delete(0, END)
     frame.tkraise()
     under.set('')
     blank.set('')
@@ -146,6 +146,7 @@ def raise_frame_bac(frame):
     Main.dashlabel2.config(text=" ")
     letterlist[:] = []
     wronglist[:] = []
+    Main.label_wrong_let.config(text="")
     create_hang_man()
 
 
@@ -163,6 +164,7 @@ def change_underline():
         guesslist.append(letter)
         if letter not in lisr:
             wronglist.append(letter)
+            Main.label_wrong_let.config(text=wronglist)
             change_hang_man()
         Main.entry2.delete(0, END)
         for x in range(len(result)):
