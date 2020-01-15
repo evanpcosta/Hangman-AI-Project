@@ -4,7 +4,7 @@ from self import self
 import Main
 
 # raises frame; puts first frame entry into second frame label
-def raise_frame_for(frame):
+def raise_frame_for():
     print(len("hi my name is evan and i like cheese"))
     global labellist
     labellist = []
@@ -17,7 +17,7 @@ def raise_frame_for(frame):
     if 45 >= len(result) > 0:
         create_under_labels(result)
         create_hang_man()
-        frame.tkraise()
+        Main.second_frame.tkraise()
         Main.entry1.delete(0, END)
     else:
         Main.label_too_large.config(text="Entry too large (45 character max)")

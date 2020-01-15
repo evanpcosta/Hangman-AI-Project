@@ -1,11 +1,9 @@
-from tkinter import *
+import app as app
 
 from GUI import *
-import GUI
 
 class APP:
 
-    import GUI
     root = Tk()
     root.title('Hangman')
     root.geometry("500x400")
@@ -34,7 +32,11 @@ class APP:
     entry1 = Entry(first_frame, width=20)
     entry1.place(relx=0.5, rely=0.4, anchor=CENTER)
 
-    button_1 = Button(first_frame, text="Next", command=lambda: raise_frame_for(second_frame)).place(x=220, y=250)
+    global button_1
+    button_1 = Button(first_frame, text="Next", command=lambda: raise_frame_for())
+    button_1.place(x=220, y=250)
+    root.bind('<Return>', lambda event: raise_frame_for())
+    button_1.focus_set()
 
     global label_guess
     label_guess = Label(second_frame, text="Guess a letter:")
