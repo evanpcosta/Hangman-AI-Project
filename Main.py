@@ -1,7 +1,9 @@
 from GUI import *
+from Neuro import Neuro
 
 class APP:
 
+    file = "/Users/evancosta/Desktop/Hangman-AI-Project/english3.txt"
     root = Tk()
     root.title('Hangman')
     root.geometry("500x400")
@@ -69,4 +71,7 @@ class APP:
     label_wrong_let = Label(second_frame, text="")
     label_wrong_let.place(relx=0.7, rely=0.3, anchor=CENTER)
 
+    Neuro.parse(file)
+
     root.mainloop()
+
